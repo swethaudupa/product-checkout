@@ -1,15 +1,5 @@
 import { useState, useEffect } from 'react';
-
-interface FetchResponse<T> {
-  data: T | null;
-  loading: boolean;
-  error: Error | null;
-}
-
-type FetchProps<T> = {
-  url: string;
-  callback?: (data: T) => void;
-};
+import { FetchProps, FetchResponse } from '../types';
 
 const useFetch = <T>({ url, callback }: FetchProps<T>): FetchResponse<T> => {
   const [data, setData] = useState<T | null>(null);

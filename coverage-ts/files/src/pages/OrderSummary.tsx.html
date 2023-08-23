@@ -1,0 +1,108 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>OrderSummary.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/pages/OrderSummary.tsx</td><td class="">91.22%</td><td class="">80%</td><td class="">148</td><td class="">135</td><td class="">13</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React, { useMemo } from &quot;react&quot;;
+import { IOrderSummary } from &quot;../types&quot;;
+import { calculateTotals } from &quot;../utils&quot;;
+import Address from &quot;../components/Address&quot;;
+
+function OrderSummary(props: IOrderSummary) {
+  const { selectedItems, formState } = props;
+  const productList = Object.values(selectedItems);
+  const { totalDiscountedPrice, totalPrice, totalDiscountPercentage } = useMemo(
+    () =&gt; calculateTotals(productList),
+    [productList]
+  );
+
+  return (
+    &lt;div className=&quot;w-full&quot;&gt;
+      &lt;h2 className=&quot;mb-6&quot;&gt;Order Summary&lt;/h2&gt;
+      &lt;div className=&quot;flex flex-row&quot;&gt;
+        &lt;div className=&quot;mt-8 mr-8 space-y-3 rounded-lg bg-neutral-alabaster px-2 py-4 sm:px-6 basis-3/5 border-neutral-cool-gray&quot;&gt;
+          &lt;h3 className=&quot;mb-4&quot;&gt;Customer&#x27;s cart&lt;/h3&gt;
+          &lt;div className=&quot;productsScrollStyle&quot;&gt;
+            {Object.values(selectedItems).map((val) =&gt; {
+              return (
+                &lt;div key={val.id} className=&quot;flex flex-col sm:flex-row&quot;&gt;
+                  &lt;img
+                    className=&quot;m-2 h-24 w-28 rounded-md border object-cover object-center&quot;
+                    src={val.thumbnail}
+                    alt=&quot;productimage&quot;
+                  /&gt;
+                  &lt;div className=&quot;flex w-full flex-col px-4 py-4&quot;&gt;
+                    &lt;span className=&quot;font-semibold&quot;&gt;{val.title}&lt;/span&gt;
+                    &lt;span className=&quot;float-right&quot;&gt;{val.brand}&lt;/span&gt;
+                    &lt;p&gt;
+                      &lt;span className=&quot;text-xl  font-bold text-slate-900&quot;&gt;
+                        ₹{val.discountedPrice}
+                      &lt;/span&gt;
+                      &lt;span className=&quot;text-sm ml-1 text-slate-900 line-through&quot;&gt;
+                        {val.price}
+                      &lt;/span&gt;
+                    &lt;/p&gt;
+                    &lt;div&gt;&lt;/div&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              );
+            })}
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className=&quot;basis-2/5&quot;&gt;
+          &lt;div className=&quot;mt-8 pl-6 py-2 bg-neutral-alabaster&quot;&gt;
+            &lt;h3 className=&quot;mb-6&quot;&gt;Shipping Address&lt;/h3&gt;
+            &lt;Address {...formState} /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;mt-6 border-b py-2&quot;&gt;
+            &lt;h3 className=&quot;mb-6&quot;&gt;Summary&lt;/h3&gt;
+            &lt;div className=&quot;flex items-center justify-between&quot;&gt;
+              &lt;p className=&quot;text-sm font-medium text-gray-900&quot;&gt;Subtotal&lt;/p&gt;
+              &lt;p&gt;
+                &lt;span className=&quot;font-semibold text-gray-900&quot;&gt;
+                  ₹{totalDiscountedPrice}
+                &lt;/span&gt;
+                &lt;span className=&quot;text-xs ml-1 text-slate-900 line-through&quot;&gt;
+                  {totalPrice}
+                &lt;/span&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex items-center justify-between&quot;&gt;
+              &lt;p className=&quot;text-sm font-medium text-gray-900&quot;&gt;Shipping&lt;/p&gt;
+              &lt;p className=&quot;font-semibold text-gray-900&quot;&gt;₹8.00&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;flex items-center justify-between&quot;&gt;
+              &lt;p className=&quot;text-sm font-medium text-gray-900&quot;&gt;
+                Total Discount
+              &lt;/p&gt;
+              &lt;p className=&quot;font-semibold text-gray-900&quot;&gt;
+                {`${totalDiscountPercentage.toFixed(2)}%`}
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;mt-6 flex items-center justify-between&quot;&gt;
+            &lt;p className=&quot;text-sm font-medium text-gray-900&quot;&gt;Total&lt;/p&gt;
+            &lt;p className=&quot;text-2xl font-semibold text-gray-900&quot;&gt;
+              {totalDiscountedPrice + 8}
+            &lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default OrderSummary;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:20,&quot;character&quot;:47,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:26,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:30,&quot;text&quot;:&quot;id&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:25,&quot;character&quot;:25,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:25,&quot;character&quot;:29,&quot;text&quot;:&quot;thumbnail&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:53,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:57,&quot;text&quot;:&quot;title&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:30,&quot;character&quot;:51,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:30,&quot;character&quot;:55,&quot;text&quot;:&quot;brand&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:26,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:30,&quot;text&quot;:&quot;discountedPrice&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:36,&quot;character&quot;:25,&quot;text&quot;:&quot;val&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/pages/OrderSummary.tsx&quot;,&quot;line&quot;:36,&quot;character&quot;:29,&quot;text&quot;:&quot;price&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 23 Aug 2023 21:16:07 GMT</p>
+    </body>
+  </html>
+  

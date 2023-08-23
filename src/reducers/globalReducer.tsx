@@ -1,17 +1,6 @@
-import { IProducts, Product } from "./App";
+import { GlobalState, GlobalAction } from "../types";
 
-export interface FormState {
-  name: string;
-  addr_1: string;
-  addr_2: string;
-  city: string;
-  state: string;
-  zipcode: string;
-  country: string;
-  tel: string;
-}
-
-export const initialFormState = {
+const initialFormState = {
   name: "",
   addr_1: "",
   addr_2: "",
@@ -22,23 +11,7 @@ export const initialFormState = {
   tel: "",
 };
 
-interface State {
-  currentStep: number;
-  selectedProducts: IProducts;
-  formState: FormState;
-  orderLoading: boolean;
-  OrderStatusMessage: string;
-}
-
-type Action =
-  | { type: "SET_CURRENT_STEP"; payload: number }
-  | { type: "SELECT_PRODUCT"; payload: Product }
-  | { type: "UPDATE_FIELD"; field: string; value: any }
-  | { type: "START" }
-  | { type: "SUCCESS"; OrderStatusMessage: string }
-  | { type: "FAILURE"; OrderStatusMessage: string };
-
-export const initialState: State = {
+export const initialState: GlobalState = {
   currentStep: 1,
   selectedProducts: {},
   formState: initialFormState,
@@ -46,7 +19,7 @@ export const initialState: State = {
   OrderStatusMessage: "",
 };
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: GlobalState, action: GlobalAction): GlobalState => {
   switch (action.type) {
     case "SET_CURRENT_STEP":
       return { ...state, currentStep: action.payload };

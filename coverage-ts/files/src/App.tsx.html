@@ -1,0 +1,145 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>App.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/App.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">130</td><td class="">130</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React, { useCallback, useReducer } from &quot;react&quot;;
+import &quot;./App.css&quot;;
+import StepperControl from &quot;./components/StepperControl&quot;;
+import Stepper from &quot;./components/Stepper&quot;;
+import ProductSelection from &quot;./pages/ProductSelection&quot;;
+import AddressForm from &quot;./pages/AddressForm&quot;;
+import OrderSummary from &quot;./pages/OrderSummary&quot;;
+import useFetch from &quot;./hooks/useFetch&quot;;
+import reducer, { initialState } from &quot;./reducers/globalReducer&quot;;
+import OrderStatus from &quot;./pages/OrderStatus&quot;;
+import { FormState, Product, ProductItem } from &quot;./types&quot;;
+import { areAllFieldsFilled, formatProducts, simulateAPICall } from &quot;./utils&quot;;
+import { steps } from &quot;./constants&quot;;
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const {
+    selectedProducts,
+    currentStep,
+    formState,
+    orderLoading,
+    OrderStatusMessage,
+  } = state;
+
+  const callbackFn = useCallback(formatProducts, []);
+  const { data, loading } = useFetch&lt;ProductItem&gt;({
+    url: &quot;https://dummyjson.com/products&quot;,
+    callback: callbackFn,
+  });
+
+  const handleProductSelection = (product: Product) =&gt; {
+    dispatch({ type: &quot;SELECT_PRODUCT&quot;, payload: product });
+  };
+
+  const onStepperControlClick = (direction: string) =&gt; {
+    let newStep = currentStep;
+    if (direction === &quot;next&quot;) {
+      switch (currentStep) {
+        case 1: {
+          if (Object.keys(selectedProducts).length !== 0) {
+            newStep++;
+          }
+          break;
+        }
+        case 2: {
+          if (areAllFieldsFilled(formState)) {
+            newStep++;
+          }
+          break;
+        }
+        case 3: {
+          simulateAPICall(dispatch);
+          newStep++;
+          break;
+        }
+        default:
+          break;
+      }
+    } else {
+      if (currentStep === 1) return;
+      newStep--;
+    }
+    dispatch({ type: &quot;SET_CURRENT_STEP&quot;, payload: newStep });
+  };
+
+  const handleInputChange = (field: keyof FormState, value: string) =&gt; {
+    dispatch({
+      type: &quot;UPDATE_FIELD&quot;,
+      field,
+      value,
+    });
+  };
+
+  const renderPages = (step: number) =&gt; {
+    switch (step) {
+      case 1:
+        return (
+          &lt;ProductSelection
+            onSelection={handleProductSelection}
+            selectedProducts={selectedProducts}
+            data={data}
+            loading={loading}
+          /&gt;
+        );
+      case 2:
+        return (
+          &lt;AddressForm
+            formState={formState}
+            handleInputChange={handleInputChange}
+          /&gt;
+        );
+      case 3:
+        return (
+          &lt;OrderSummary
+            formState={formState}
+            selectedItems={selectedProducts}
+          /&gt;
+        );
+      case 4:
+        return (
+          &lt;OrderStatus
+            orderLoading={orderLoading}
+            OrderStatusMessage={OrderStatusMessage}
+          /&gt;
+        );
+      default:
+    }
+  };
+
+  return (
+    &lt;main className=&quot;flex flex-col text-neutral-cool-gray lg:flex-row grow  lg:rounded-lg lg:bg-white lg:shadow lg:h-screen&quot;&gt;
+      &lt;Stepper currentStep={currentStep} steps={steps} /&gt;
+      &lt;div className=&quot;px-4 relative bg-neutral-magnolia lg:bg-transparent lg:flex lg:flex-col lg:w-full&quot;&gt;
+        &lt;div className=&quot;bg-neutral-alabaster px-6 py-9 rounded-[0.625rem] -translate-y-[4.5rem] flex w-full grow [&amp;_h2]:text-2xl [&amp;_h2]:font-bold [&amp;_h2]:text-primary-marine-blue [&amp;_h3]:font-medium [&amp;_h3]:text-primary-marine-blue lg:bg-transparent lg:translate-y-0&quot;&gt;
+          {renderPages(currentStep)}
+        &lt;/div&gt;
+        &lt;StepperControl
+          handleClick={onStepperControlClick}
+          steps={steps}
+          currentStep={currentStep}
+        /&gt;
+      &lt;/div&gt;
+    &lt;/main&gt;
+  );
+}
+
+export default App;
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 23 Aug 2023 21:16:07 GMT</p>
+    </body>
+  </html>
+  

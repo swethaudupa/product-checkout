@@ -1,0 +1,135 @@
+{
+  "fileCounts": {},
+  "anys": [
+    {
+      "file": "src/types/index.tsx",
+      "line": 50,
+      "character": 43,
+      "text": "value",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/index.tsx",
+      "line": 14,
+      "character": 22,
+      "text": "field",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/index.tsx",
+      "line": 14,
+      "character": 32,
+      "text": "field",
+      "kind": 1
+    },
+    {
+      "file": "src/utils/index.tsx",
+      "line": 14,
+      "character": 38,
+      "text": "trim",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 20,
+      "character": 47,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 22,
+      "character": 26,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 22,
+      "character": 30,
+      "text": "id",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 25,
+      "character": 25,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 25,
+      "character": 29,
+      "text": "thumbnail",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 29,
+      "character": 53,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 29,
+      "character": 57,
+      "text": "title",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 30,
+      "character": 51,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 30,
+      "character": 55,
+      "text": "brand",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 33,
+      "character": 26,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 33,
+      "character": 30,
+      "text": "discountedPrice",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 36,
+      "character": 25,
+      "text": "val",
+      "kind": 1
+    },
+    {
+      "file": "src/pages/OrderSummary.tsx",
+      "line": 36,
+      "character": 29,
+      "text": "price",
+      "kind": 1
+    },
+    {
+      "file": "src/reducers/globalReducer.tsx",
+      "line": 44,
+      "character": 33,
+      "text": "value",
+      "kind": 1
+    }
+  ],
+  "percentage": 98.21958456973294,
+  "total": 1011,
+  "covered": 993,
+  "uncovered": 18
+}

@@ -1,17 +1,5 @@
-import "../App.css";
-import { Product, IProducts } from "../App";
-import Loader from "./Loader";
-
-interface ProductItem {
-  products: Product[];
-}
-
-interface IProductSelection {
-  onSelection: (product: Product) => void;
-  selectedProducts: IProducts;
-  data: ProductItem | null;
-  loading: boolean;
-}
+import { IProductSelection, Product } from "../types";
+import Loader from "../components/Loader";
 
 function ProductSelection(props: IProductSelection) {
   const { onSelection, selectedProducts, data, loading } = props;

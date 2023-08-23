@@ -1,26 +1,5 @@
-.box {
-  width: 100px;
-  height: 100px;
-}
-
-.sidebarBg {
-  background-color: #483eff;
-}
-
 .selectedStepperBg {
   background-color: #bfe2fdd9;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.green {
-  background-color: green;
-}
-
-.customBorder {
-  border: 1px solid grey;
 }
 
 ::-webkit-scrollbar {

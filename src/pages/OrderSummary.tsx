@@ -1,74 +1,7 @@
-import { useMemo } from "react";
-import { IProducts, Product } from "../App";
-import "../App.css";
-import { FormState } from "../globalReducer";
-
-interface IOrderSummary {
-  selectedItems: IProducts;
-  formState: FormState;
-}
-
-function calculateTotals(products: Product[]) {
-  const { totalDiscountedPrice, totalPrice } = products.reduce(
-    (totals, product) => {
-      return {
-        totalDiscountedPrice:
-          totals.totalDiscountedPrice + product.discountedPrice,
-        totalPrice: totals.totalPrice + product.price,
-      };
-    },
-    { totalDiscountedPrice: 0, totalPrice: 0 }
-  );
-
-  const totalDiscountPercentage =
-    ((totalPrice - totalDiscountedPrice) / totalPrice) * 100;
-
-  return {
-    totalDiscountedPrice,
-    totalPrice,
-    totalDiscountPercentage,
-  };
-}
-
-interface AddressProps {
-  name: string;
-  addr_1: string;
-  addr_2: string;
-  city: string;
-  state: string;
-  zipcode: string;
-  country: string;
-  tel: string;
-}
-
-const Address: React.FC<AddressProps> = ({
-  name,
-  addr_1,
-  addr_2,
-  city,
-  state,
-  zipcode,
-  country,
-  tel,
-}) => {
-  return (
-    <>
-      <h1>{name}</h1>
-      <p>
-        {addr_1}
-        {addr_2 && `, ${addr_2}`}
-        <br />
-        {city}
-        {state && `, ${state}`}
-        <br />
-        {zipcode}
-        <br />
-        {country}
-      </p>
-      {tel && <p>Tel: {tel}</p>}
-    </>
-  );
-};
+import React, { useMemo } from "react";
+import { IOrderSummary } from "../types";
+import { calculateTotals } from "../utils";
+import Address from "../components/Address";
 
 function OrderSummary(props: IOrderSummary) {
   const { selectedItems, formState } = props;
